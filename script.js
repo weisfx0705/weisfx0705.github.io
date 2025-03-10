@@ -447,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const diceResults = generateRandomDiceResults();
         
         // 創建系統提示，包含骰子結果
-        const systemPrompt = `你現在要根據以下隨機擲出的占星骰子來解讀用戶的問題：
+        const systemPrompt = `你現在要根據以下隨機擲出的占星骰子來解讀用戶的問題，並善用表情符號豐富文字：
 行星（號碼：${diceResults.planet.number}）：${diceResults.planet.name}
 星座（號碼：${diceResults.sign.number}）：${diceResults.sign.name}
 宮位（號碼：${diceResults.house.number}）：${diceResults.house.name}
@@ -474,10 +474,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     'Authorization': `Bearer ${apiKey}`
                 },
                 body: JSON.stringify({
-                    model: 'gpt-4o-mini',
+                    model: 'gpt-4o',
                     messages: chatHistory,
                     temperature: 0.7,
-                    max_tokens: 1000
+                    max_tokens: 3000
                 })
             });
             

@@ -193,7 +193,7 @@ body::before {
     flex-direction: column;
     gap: 15px;
     height: calc(100% - 180px); /* 增加高度，讓底部有更多空間 */
-    padding-bottom: 40px; /* 增加底部內邊距，避免與輸入區域重疊 */
+    padding-bottom: 80px; /* 增加底部內邊距，避免與輸入區域重疊 */
     position: relative;
 }
 
