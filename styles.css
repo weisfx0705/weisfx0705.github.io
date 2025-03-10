@@ -195,6 +195,11 @@ body::before {
     height: calc(100% - 180px); /* 增加高度，讓底部有更多空間 */
     padding-bottom: 80px; /* 增加底部內邊距，避免與輸入區域重疊 */
     position: relative;
+    background-image: url('image/witch.avif');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: top center;
+    background-size: contain;
 }
 
 .message {
@@ -496,31 +501,8 @@ body::before {
 .footer p {
     margin: 0;
     padding: 0;
-}
-
-.witch-image {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    z-index: 10; /* 提高 z-index，確保圖片始終可見 */
-    pointer-events: none; /* 防止圖片影響點擊事件 */
-}
-
-.witch-image img {
-    width: 130px;
-    height: auto;
-    opacity: 0.75; /* 增加透明度 */
-    transition: all 0.3s ease;
-    pointer-events: auto; /* 恢復圖片的點擊事件 */
-    filter: drop-shadow(0 0 8px rgba(138, 43, 226, 0.6)) blur(1px); /* 添加發光效果和輕微模糊 */
-    border-radius: 50%; /* 圓形邊緣 */
-    mask-image: radial-gradient(circle, black 50%, transparent 80%); /* 創建漸變邊緣效果 */
-    -webkit-mask-image: radial-gradient(circle, black 50%, transparent 80%); /* Safari 支援 */
-}
-
-.witch-image img:hover {
-    opacity: 0.9; /* 懸停時略微提高不透明度 */
-    filter: drop-shadow(0 0 12px rgba(138, 43, 226, 0.8)) blur(0.5px); /* 懸停時增強發光效果並減少模糊 */
+    font-size: 0.9rem;
+    opacity: 0.7;
 }
 
 /* 平板電腦（768px到1024px） */
@@ -624,10 +606,6 @@ body::before {
     .footer p {
         font-size: 0.8rem;
     }
-
-    .witch-image {
-        max-width: 150px;
-    }
 }
 
 /* 小型手機（480px以下） */
@@ -646,8 +624,12 @@ body::before {
         font-size: 0.9rem;
     }
 
-    .witch-image {
-        max-width: 120px;
+    .footer {
+        padding: 10px;
+    }
+
+    .footer p {
+        font-size: 0.9rem;
     }
 }
 
@@ -679,9 +661,5 @@ body::before {
 
     .chat-messages {
         height: calc(100% - 120px);
-    }
-
-    .witch-image {
-        max-width: 100px;
     }
 } 

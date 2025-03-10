@@ -105,14 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
             chatHistory = [];
             // 重新發送初始問候語
             sendInitialGreeting();
-            // 保持巫師圖片的顯示
-            const witchImage = document.querySelector('.witch-image');
-            if (!witchImage) {
-                const newWitchImage = document.createElement('div');
-                newWitchImage.className = 'witch-image';
-                newWitchImage.innerHTML = '<img src="image/witch.avif" alt="巫師圖片">';
-                chatMessages.appendChild(newWitchImage);
-            }
         }
     });
 
