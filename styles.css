@@ -521,4 +521,167 @@ body::before {
 .witch-image img:hover {
     opacity: 0.9; /* 懸停時略微提高不透明度 */
     filter: drop-shadow(0 0 12px rgba(138, 43, 226, 0.8)) blur(0.5px); /* 懸停時增強發光效果並減少模糊 */
+}
+
+/* 平板電腦（768px到1024px） */
+@media screen and (max-width: 1024px) {
+    .container {
+        padding: 15px;
+        height: calc(100vh - 60px);
+    }
+
+    .welcome-screen {
+        padding: 30px;
+    }
+
+    .welcome-screen h1 {
+        font-size: 2rem;
+    }
+
+    .chat-header h2 {
+        font-size: 2.2rem;
+        min-width: 300px;
+    }
+
+    .api-key-container {
+        flex-direction: column;
+    }
+
+    .api-key-input {
+        width: 100%;
+    }
+}
+
+/* 手機（768px以下） */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .welcome-screen {
+        padding: 20px;
+    }
+
+    .welcome-screen h1 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+
+    .welcome-screen p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+
+    .start-button {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+
+    .chat-header {
+        height: 80px;
+        padding: 15px;
+    }
+
+    .chat-header h2 {
+        font-size: 1.8rem;
+        min-width: 200px;
+        padding: 10px 20px;
+    }
+
+    .chat-messages {
+        height: calc(100% - 160px);
+        padding: 15px;
+    }
+
+    .message {
+        max-width: 90%;
+        padding: 10px 12px;
+        font-size: 0.95rem;
+    }
+
+    .chat-input-container {
+        padding: 10px;
+    }
+
+    #userInput {
+        padding: 10px;
+        font-size: 0.95rem;
+    }
+
+    .input-buttons {
+        gap: 8px;
+    }
+
+    .voice-button, .send-button {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+
+    .footer {
+        padding: 10px;
+    }
+
+    .footer p {
+        font-size: 0.8rem;
+    }
+
+    .witch-image {
+        max-width: 150px;
+    }
+}
+
+/* 小型手機（480px以下） */
+@media screen and (max-width: 480px) {
+    .welcome-screen h1 {
+        font-size: 1.5rem;
+    }
+
+    .chat-header h2 {
+        font-size: 1.5rem;
+        min-width: 150px;
+    }
+
+    .message {
+        max-width: 95%;
+        font-size: 0.9rem;
+    }
+
+    .witch-image {
+        max-width: 120px;
+    }
+}
+
+/* 確保在較小螢幕上的垂直排列 */
+@media screen and (max-height: 600px) {
+    .container {
+        height: auto;
+        min-height: calc(100vh - 40px);
+    }
+
+    .chat-container {
+        height: calc(100vh - 60px);
+    }
+
+    .chat-messages {
+        max-height: calc(100vh - 200px);
+    }
+}
+
+/* 優化橫向模式 */
+@media screen and (orientation: landscape) and (max-height: 600px) {
+    .welcome-screen {
+        padding: 15px;
+    }
+
+    .chat-header {
+        height: 60px;
+    }
+
+    .chat-messages {
+        height: calc(100% - 120px);
+    }
+
+    .witch-image {
+        max-width: 100px;
+    }
 } 
