@@ -80,6 +80,23 @@ document.addEventListener('DOMContentLoaded', () => {
     clearButton.innerHTML = '<i class="fas fa-trash"></i> 清空對話';
     document.querySelector('.chat-header').appendChild(clearButton);
     
+    // 創建並添加 API Key 更新按鈕
+    const apiKeyUpdateButton = document.createElement('button');
+    apiKeyUpdateButton.id = 'apiKeyUpdateButton';
+    apiKeyUpdateButton.className = 'api-key-update-button';
+    apiKeyUpdateButton.innerHTML = '<i class="fas fa-key"></i> API Key';
+    document.querySelector('.chat-header').appendChild(apiKeyUpdateButton);
+    
+    // API Key 更新按鈕點擊事件
+    apiKeyUpdateButton.addEventListener('click', () => {
+        const newApiKey = prompt('請輸入新的 API Key：');
+        if (newApiKey && newApiKey.trim() !== '') {
+            apiKey = newApiKey.trim();
+            localStorage.setItem('openai_api_key', apiKey);
+            alert('API Key 已成功更新！');
+        }
+    });
+    
     // 點擊清空對話按鈕
     clearButton.addEventListener('click', () => {
         if (confirm('確定要重新開始對話嗎？')) {

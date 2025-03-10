@@ -449,6 +449,32 @@ body::before {
     transform: scale(1.05);
 }
 
+.api-key-update-button {
+    position: absolute;
+    right: 15px;
+    top: 48px; /* 位於清空對話按鈕下方 */
+    background-color: var(--button-color);
+    color: var(--text-color);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.api-key-update-button:hover {
+    background-color: var(--button-hover-color);
+    transform: scale(1.05);
+}
+
+.api-key-update-button i {
+    font-size: 0.9rem;
+}
+
 .clear-button i {
     font-size: 0.9rem;
 }
