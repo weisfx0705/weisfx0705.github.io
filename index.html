@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>厭世的占星骰子</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-screen" id="welcomeScreen">
+            <h1>厭世的占星骰子</h1>
+            <p>準備好接受命運的嘲弄了嗎？</p>
+            <button id="startButton" class="start-button">開始占卜</button>
+        </div>
+        
+        <div class="chat-container" id="chatContainer" style="display: none;">
+            <div class="chat-header">
+                <h2 id="title">厭世的占星骰子</h2>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <!-- 消息將在這裡動態添加 -->
+                <div class="witch-image">
+                    <img src="image/witch.avif" alt="巫師圖片">
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <textarea id="userInput" placeholder="問點什麼吧，反正命運也不會因為你的問題而改變..."></textarea>
+                <div class="input-buttons">
+                    <button id="voiceButton" class="voice-button">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button id="sendButton" class="send-button">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 義守大學電影與電視學系陳嘉暐老師設計</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="transition_canvas.js"></script>
+    <script src="starfield.js"></script>
+</body>
+</html> 
