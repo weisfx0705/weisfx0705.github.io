@@ -44,9 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
             apiKey = newApiKey;
             localStorage.setItem('openai_api_key', apiKey);
             apiKeyInput.value = '********';
-            alert('API KEY 已成功保存！');
+            alert('OPENAI API KEY 已成功保存！');
         } else if (newApiKey === '') {
-            alert('請輸入有效的 API KEY！');
+            alert('請輸入有效的 OPENAI API KEY！');
         }
     });
 
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // API Key 更新按鈕點擊事件
     apiKeyUpdateButton.addEventListener('click', () => {
-        const newApiKey = prompt('請輸入新的 API Key：');
+        const newApiKey = prompt('請輸入OpenAI的 API Key：');
         if (newApiKey && newApiKey.trim() !== '') {
             apiKey = newApiKey.trim();
             localStorage.setItem('openai_api_key', apiKey);
@@ -474,7 +474,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     'Authorization': `Bearer ${apiKey}`
                 },
                 body: JSON.stringify({
-                    model: 'gpt-4o',
+                    model: 'gpt-4o-mini',
                     messages: chatHistory,
                     temperature: 0.7,
                     max_tokens: 3000
