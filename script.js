@@ -26,14 +26,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const userInput = document.getElementById('userInput');
     const sendButton = document.getElementById('sendButton');
     const voiceButton = document.getElementById('voiceButton');
-    const settingsButton = document.getElementById('settingsButton');
-    const settingsModal = document.getElementById('settingsModal');
     const apiKeyInput = document.getElementById('apiKeyInput');
-    const modalCloseButton = document.querySelector('.modal-close');
-    const saveButton = document.querySelector('.save-button');
+    const saveApiKeyButton = document.getElementById('saveApiKey');
 
-    // API密鑰（從本地存儲中獲取）
-    let apiKey = localStorage.getItem('openai_api_key') || 'YOUR_API_KEY_HERE';
+    // API密鑰
+    let apiKey = localStorage.getItem('openai_api_key') || '';
+    
+    // 如果有保存的 API KEY，顯示在輸入框中（用星號表示）
+    if (apiKey) {
+        apiKeyInput.value = '********';
+    }
+
+    // 保存 API KEY
+    saveApiKeyButton.addEventListener('click', () => {
+        const newApiKey = apiKeyInput.value.trim();
+        if (newApiKey && newApiKey !== '********') {
+            apiKey = newApiKey;
+            localStorage.setItem('openai_api_key', apiKey);
+            apiKeyInput.value = '********';
+            alert('API KEY 已成功保存！');
+        } else if (newApiKey === '') {
+            alert('請輸入有效的 API KEY！');
+        }
+    });
 
     // 語音識別相關變數
     let recognition = null;
@@ -81,37 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 newWitchImage.innerHTML = '<img src="image/witch.avif" alt="巫師圖片">';
                 chatMessages.appendChild(newWitchImage);
             }
-        }
-    });
-
-    // 設置按鈕點擊事件
-    settingsButton.addEventListener('click', () => {
-        settingsModal.style.display = 'block';
-        apiKeyInput.value = apiKey === 'YOUR_API_KEY_HERE' ? '' : apiKey;
-    });
-
-    // 關閉按鈕點擊事件
-    modalCloseButton.addEventListener('click', () => {
-        settingsModal.style.display = 'none';
-    });
-
-    // 點擊模態框外部關閉
-    window.addEventListener('click', (event) => {
-        if (event.target === settingsModal) {
-            settingsModal.style.display = 'none';
-        }
-    });
-
-    // 保存按鈕點擊事件
-    saveButton.addEventListener('click', () => {
-        const newApiKey = apiKeyInput.value.trim();
-        if (newApiKey) {
-            apiKey = newApiKey;
-            localStorage.setItem('openai_api_key', apiKey);
-            settingsModal.style.display = 'none';
-            displayMessage('系統提示：API 密鑰已更新', 'bot');
-        } else {
-            alert('請輸入有效的 API 密鑰');
         }
     });
 
@@ -331,6 +315,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 點擊開始按鈕
     startButton.addEventListener('click', () => {
+        if (!apiKey) {
+            alert('請先設置 API KEY！');
+            return;
+        }
         welcomeScreen.style.display = 'none';
         chatContainer.style.display = 'flex';
         

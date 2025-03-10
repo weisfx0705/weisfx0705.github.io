@@ -14,14 +14,15 @@
             <h1>厭世的占星骰子</h1>
             <p>準備好接受命運的嘲弄了嗎？</p>
             <button id="startButton" class="start-button">開始占卜</button>
+            <div class="api-key-container">
+                <input type="password" id="apiKeyInput" class="api-key-input" placeholder="請輸入您的 API KEY">
+                <button id="saveApiKey" class="api-key-button">儲存 API KEY</button>
+            </div>
         </div>
         
         <div class="chat-container" id="chatContainer" style="display: none;">
             <div class="chat-header">
                 <h2 id="title">厭世的占星骰子</h2>
-                <button id="settingsButton" class="settings-button">
-                    <i class="fas fa-cog"></i>
-                </button>
             </div>
             
             <div class="chat-messages" id="chatMessages">
@@ -42,17 +43,6 @@
                     </button>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div id="settingsModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>設置 API 密鑰</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <input type="password" id="apiKeyInput" placeholder="請輸入您的 OpenAI API 密鑰">
-            <button class="save-button">儲存</button>
         </div>
     </div>
 
