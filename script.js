@@ -26,9 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const userInput = document.getElementById('userInput');
     const sendButton = document.getElementById('sendButton');
     const voiceButton = document.getElementById('voiceButton');
+    const settingsButton = document.getElementById('settingsButton');
+    const settingsModal = document.getElementById('settingsModal');
+    const apiKeyInput = document.getElementById('apiKeyInput');
+    const modalCloseButton = document.querySelector('.modal-close');
+    const saveButton = document.querySelector('.save-button');
 
-    // API密鑰（直接嵌入，用戶不需要輸入）
-    let apiKey = 'YOUR_API_KEY_HERE';
+    // API密鑰（從本地存儲中獲取）
+    let apiKey = localStorage.getItem('openai_api_key') || 'YOUR_API_KEY_HERE';
 
     // 語音識別相關變數
     let recognition = null;
@@ -76,6 +81,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 newWitchImage.innerHTML = '<img src="image/witch.avif" alt="巫師圖片">';
                 chatMessages.appendChild(newWitchImage);
             }
+        }
+    });
+
+    // 設置按鈕點擊事件
+    settingsButton.addEventListener('click', () => {
+        settingsModal.style.display = 'block';
+        apiKeyInput.value = apiKey === 'YOUR_API_KEY_HERE' ? '' : apiKey;
+    });
+
+    // 關閉按鈕點擊事件
+    modalCloseButton.addEventListener('click', () => {
+        settingsModal.style.display = 'none';
+    });
+
+    // 點擊模態框外部關閉
+    window.addEventListener('click', (event) => {
+        if (event.target === settingsModal) {
+            settingsModal.style.display = 'none';
+        }
+    });
+
+    // 保存按鈕點擊事件
+    saveButton.addEventListener('click', () => {
+        const newApiKey = apiKeyInput.value.trim();
+        if (newApiKey) {
+            apiKey = newApiKey;
+            localStorage.setItem('openai_api_key', apiKey);
+            settingsModal.style.display = 'none';
+            displayMessage('系統提示：API 密鑰已更新', 'bot');
+        } else {
+            alert('請輸入有效的 API 密鑰');
         }
     });
 
@@ -304,30 +340,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // 發送初始問候
         sendInitialGreeting();
     });
-
-    // 請求API密鑰（保留但不再使用）
-    function requestApiKey() {
-        const apiKeyInput = prompt('請輸入您的OpenAI API密鑰（這只會保存在您的瀏覽器中）:');
-        if (apiKeyInput && apiKeyInput.trim() !== '') {
-            apiKey = apiKeyInput.trim();
-            localStorage.setItem('openai_api_key', apiKey);
-            
-            // 發送初始的厭世女巫問候
-            sendInitialGreeting();
-        } else {
-            alert('需要API密鑰才能繼續。請刷新頁面重試。');
-        }
-    }
-
-    // 檢查本地存儲中是否有API密鑰（保留但不再使用）
-    function checkSavedApiKey() {
-        const savedKey = localStorage.getItem('openai_api_key');
-        if (savedKey) {
-            apiKey = savedKey;
-            return true;
-        }
-        return false;
-    }
 
     // 發送初始問候
     function sendInitialGreeting() {
