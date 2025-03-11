@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const voiceButton = document.getElementById('voiceButton');
     const apiKeyInput = document.getElementById('apiKeyInput');
     const saveApiKeyButton = document.getElementById('saveApiKey');
+    const microphoneStatus = document.querySelector('.microphone-status');
 
     // API密鑰
     let apiKey = localStorage.getItem('openai_api_key') || '';
@@ -56,31 +57,25 @@ document.addEventListener('DOMContentLoaded', () => {
     let microphonePermissionGranted = false; // 新增: 追蹤麥克風權限狀態
     let speechRecognitionSupported = false;  // 新增: 追蹤瀏覽器是否真正支援語音識別
     
-    let microphoneStatus = document.createElement('div');
-    microphoneStatus.className = 'microphone-status';
-    microphoneStatus.textContent = '點擊麥克風開始語音輸入';
-    microphoneStatus.style.display = 'none';
-    document.querySelector('.chat-input-container').insertBefore(microphoneStatus, document.querySelector('.input-buttons'));
-    
     // 計時器相關變數
     let countdownTimer = null;
     let remainingTime = 30; // 30秒倒數
     let timerDisplay = document.createElement('div');
     timerDisplay.className = 'timer-display';
+    timerDisplay.innerHTML = '<i class="fas fa-clock"></i> <span>30</span>';
     timerDisplay.style.display = 'none';
-    document.querySelector('.chat-input-container').insertBefore(timerDisplay, document.querySelector('.input-buttons'));
+    document.querySelector('.chat-input-container').appendChild(timerDisplay);
 
     // 對話歷史記錄
     let chatHistory = [];
     
-    // 創建並添加清空對話按鈕
+    // 創建其他UI元素
     const clearButton = document.createElement('button');
     clearButton.id = 'clearButton';
     clearButton.className = 'clear-button';
     clearButton.innerHTML = '<i class="fas fa-trash"></i> 清空對話';
     document.querySelector('.chat-header').appendChild(clearButton);
     
-    // 創建並添加 API Key 更新按鈕
     const apiKeyUpdateButton = document.createElement('button');
     apiKeyUpdateButton.id = 'apiKeyUpdateButton';
     apiKeyUpdateButton.className = 'api-key-update-button';
@@ -110,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 檢查瀏覽器對語音識別的支援
     function checkSpeechRecognitionSupport() {
-        // 檢查是否支持 SpeechRecognition API
+        // 檢查是否支援 SpeechRecognition API
         if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
             console.warn('您的瀏覽器不支持語音識別 API');
             return false;
@@ -184,19 +179,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     voiceButton.style.backgroundColor = '#4CAF50'; // 綠色
                     voiceButton.innerHTML = '<i class="fas fa-microphone-alt"></i>';
                     microphoneStatus.style.display = 'block';
-                    microphoneStatus.textContent = '正在聆聽...（再次點擊麥克風或點擊發送按鈕停止）';
+                    microphoneStatus.textContent = '正在聆聽...（點擊發送按鈕停止）';
                     microphoneStatus.style.color = '#4CAF50';
                     
-                    // 啟動計時器但不顯示界面
-                    clearInterval(countdownTimer);
-                    remainingTime = 30;
-                    countdownTimer = setInterval(() => {
-                        remainingTime--;
-                        if (remainingTime <= 0) {
-                            stopListening();
-                            clearInterval(countdownTimer);
-                        }
-                    }, 1000);
+                    // 啟動計時器
+                    startCountdown();
                 };
                 
                 recognition.onresult = (event) => {
@@ -270,14 +257,14 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(countdownTimer);
         remainingTime = 30;
         
-        // 不顯示計時器
-        // timerDisplay.style.display = 'block';
-        // updateTimerDisplay();
+        // 顯示計時器
+        timerDisplay.style.display = 'block';
+        updateTimerDisplay();
         
-        // 啟動計時器，但不顯示
+        // 啟動計時器
         countdownTimer = setInterval(() => {
             remainingTime--;
-            // updateTimerDisplay();
+            updateTimerDisplay();
             
             if (remainingTime <= 0) {
                 // 時間到，停止語音識別
@@ -287,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
     
-    // 更新計時器顯示（保留但不使用）
+    // 更新計時器顯示
     function updateTimerDisplay() {
         const minutes = Math.floor(remainingTime / 60);
         const seconds = remainingTime % 60;
@@ -313,7 +300,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // 停止計時器
             clearInterval(countdownTimer);
-            // timerDisplay.style.display = 'none'; // 已經隱藏了
+            timerDisplay.style.display = 'none';
             
             // 清空輸入框
             userInput.value = '';

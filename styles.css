@@ -279,37 +279,14 @@ body::before {
     margin-bottom: 10px;
 }
 
-/* 設置 placeholder 文字樣式 */
-#userInput::placeholder {
-    color: rgba(230, 230, 250, 0.35); /* 淡化的淺灰色 */
-    opacity: 0.6; /* 降低不透明度 */
-    font-style: italic; /* 使用斜體樣式使其區別於正常文字 */
-}
-
-/* 支持不同瀏覽器的兼容寫法 */
-#userInput::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    color: rgba(230, 230, 250, 0.35);
-    opacity: 0.6;
-    font-style: italic;
-}
-#userInput::-moz-placeholder { /* Firefox 19+ */
-    color: rgba(230, 230, 250, 0.35);
-    opacity: 0.6;
-    font-style: italic;
-}
-#userInput:-ms-input-placeholder { /* IE 10+ */
-    color: rgba(230, 230, 250, 0.35);
-    opacity: 0.6;
-    font-style: italic;
-}
-
 .input-buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 5px;
-    margin-bottom: 5px; /* 從 10px 減少到 5px */
+    margin-bottom: 5px;
     position: relative;
     z-index: 1000;
+    min-height: 40px; /* 確保按鈕區域有最小高度 */
 }
 
 .voice-button, .send-button {
@@ -324,6 +301,7 @@ body::before {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 40px; /* 確保按鈕有最小高度 */
 }
 
 .voice-button:hover, .send-button:hover {
@@ -332,13 +310,18 @@ body::before {
 
 /* 麥克風狀態提示 */
 .microphone-status {
-    margin: 10px 0;
-    padding: 8px 12px;
-    font-size: 0.9rem;
+    margin: 5px 0;
+    padding: 5px 8px;
+    font-size: 0.85rem;
     text-align: center;
     border-radius: 10px;
     background-color: rgba(30, 15, 70, 0.6);
     transition: all 0.3s ease;
+    position: absolute;
+    top: -30px; /* 將狀態提示移至按鈕區域上方 */
+    left: 0;
+    right: 0;
+    z-index: 1001;
 }
 
 /* 麥克風按鈕激活狀態 */
@@ -683,6 +666,18 @@ body::before {
     .chat-input-container {
         padding: 8px;
         max-height: 130px;
+        padding-top: 35px; /* 為麥克風狀態提示留出空間 */
+    }
+
+    .microphone-status {
+        font-size: 0.75rem;
+        padding: 3px 5px;
+        top: -25px;
+    }
+    
+    .voice-button, .send-button {
+        min-height: 36px;
+        padding: 8px;
     }
 }
 
