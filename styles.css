@@ -279,15 +279,15 @@ body::before {
     margin-bottom: 10px;
     line-height: 1.5;
     font-family: 'Microsoft JhengHei', 'PingFang TC', '微軟正黑體', sans-serif;
-    font-size: 1.1rem; /* 增加字體大小 */
+    font-size: 1.2rem; /* 進一步增加字體大小 */
 }
 
 /* 添加 placeholder 樣式 */
 #userInput::placeholder {
-    color: rgba(230, 230, 250, 0.6);
+    color: rgba(230, 230, 250, 0.7); /* 增加對比度 */
     line-height: 1.5;
     vertical-align: middle;
-    font-size: 1.1rem; /* 增加字體大小 */
+    font-size: 1.2rem; /* 進一步增加字體大小 */
 }
 
 .input-buttons {
