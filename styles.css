@@ -193,7 +193,7 @@ body::before {
     flex-direction: column;
     gap: 15px;
     height: calc(100% - 180px); /* 增加高度，讓底部有更多空間 */
-    padding-bottom: 80px; /* 增加底部內邊距，避免與輸入區域重疊 */
+    padding-bottom: 120px; /* 增加底部內邊距，避免與輸入區域重疊 */
     position: relative;
     background-image: url('image/witch.avif');
     background-repeat: no-repeat;
@@ -201,6 +201,7 @@ body::before {
     background-position: top center;
     background-size: 100% auto;
     position: relative;
+    -webkit-overflow-scrolling: touch; /* 改善iOS滾動體驗 */
 }
 
 /* 添加透明度遮罩 */
@@ -223,7 +224,8 @@ body::before {
     line-height: 1.5;
     position: relative;
     animation: fadeIn 0.3s ease;
-    z-index: 1; /* 確保消息顯示在背景遮罩之上 */
+    z-index: 5; /* 增加z-index，確保在背景和輸入區域之間 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加陰影增強可見性 */
 }
 
 @keyframes fadeIn {
@@ -258,10 +260,11 @@ body::before {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(30, 15, 50, 0.8);
+    background-color: rgba(30, 15, 50, 0.95); /* 增加不透明度以更清晰 */
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-    z-index: 3;
+    z-index: 10; /* 增加z-index確保顯示在最上層 */
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2); /* 添加陰影增強可見性 */
 }
 
 #userInput {
@@ -588,6 +591,7 @@ body::before {
     .chat-messages {
         height: calc(100% - 160px);
         padding: 15px;
+        padding-bottom: 160px; /* 在手機上增加更多底部空間 */
     }
 
     .message {
@@ -598,6 +602,7 @@ body::before {
 
     .chat-input-container {
         padding: 10px;
+        max-height: 150px; /* 限制最大高度，避免占據太多空間 */
     }
 
     #userInput {
@@ -646,6 +651,15 @@ body::before {
     .footer p {
         font-size: 0.9rem;
     }
+
+    .chat-messages {
+        padding-bottom: 180px; /* 在更小的手機上再增加底部空間 */
+    }
+
+    .chat-input-container {
+        padding: 8px;
+        max-height: 130px;
+    }
 }
 
 /* 確保在較小螢幕上的垂直排列 */
@@ -653,14 +667,17 @@ body::before {
     .container {
         height: auto;
         min-height: calc(100vh - 40px);
+        overflow-y: visible; /* 允許在小螢幕上滾動 */
     }
 
     .chat-container {
         height: calc(100vh - 60px);
+        overflow: hidden; /* 確保內部元素保持在容器內 */
     }
 
     .chat-messages {
         max-height: calc(100vh - 200px);
+        padding-bottom: 200px; /* 在高度較小的螢幕上增加更多底部空間 */
     }
 }
 
