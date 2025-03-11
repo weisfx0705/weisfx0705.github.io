@@ -302,8 +302,8 @@ document.addEventListener('DOMContentLoaded', () => {
             clearInterval(countdownTimer);
             timerDisplay.style.display = 'none';
             
-            // 清空輸入框
-            userInput.value = '';
+            // 移除清空輸入框的代碼，由sendUserMessage函數處理
+            // userInput.value = '';
         }
     }
 
@@ -366,12 +366,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // 顯示用戶消息
         displayMessage(message, 'user');
         
-        // 清空輸入框 - 確保這行代碼執行
-        userInput.value = '';
-        
-        // 立即將焦點返回到輸入框，以便用戶繼續輸入
-        userInput.focus();
-        
         // 添加到對話歷史
         chatHistory.push({
             role: 'user',
@@ -380,6 +374,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // 停止語音輸入（如果正在進行）
         stopListening();
+        
+        // 清空輸入框 - 確保在處理完所有消息相關操作後執行
+        userInput.value = '';
+        
+        // 立即將焦點返回到輸入框，以便用戶繼續輸入
+        userInput.focus();
         
         // 顯示加載指示器
         const loadingElement = document.createElement('div');
