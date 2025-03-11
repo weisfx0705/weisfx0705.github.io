@@ -277,6 +277,15 @@ body::before {
     resize: none;
     height: 60px;
     margin-bottom: 10px;
+    line-height: 1.5;
+    font-family: 'Microsoft JhengHei', 'PingFang TC', '微軟正黑體', sans-serif;
+}
+
+/* 添加 placeholder 樣式 */
+#userInput::placeholder {
+    color: rgba(230, 230, 250, 0.6);
+    line-height: 1.5;
+    vertical-align: middle;
 }
 
 .input-buttons {
@@ -615,6 +624,13 @@ body::before {
     #userInput {
         padding: 10px;
         font-size: 0.95rem;
+        height: 50px;
+        line-height: 1.3;
+        padding-top: 14px;
+    }
+
+    #userInput::placeholder {
+        line-height: 1.3;
     }
 
     .input-buttons {
@@ -667,6 +683,13 @@ body::before {
         padding: 8px;
         max-height: 130px;
         padding-top: 35px; /* 為麥克風狀態提示留出空間 */
+    }
+    
+    #userInput {
+        padding: 8px 10px;
+        padding-top: 12px; /* 在更小的設備上調整頂部內邊距 */
+        font-size: 0.9rem;
+        height: 45px; /* 更小的螢幕上進一步減小高度 */
     }
 
     .microphone-status {
