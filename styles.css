@@ -279,6 +279,30 @@ body::before {
     margin-bottom: 10px;
 }
 
+/* 設置 placeholder 文字樣式 */
+#userInput::placeholder {
+    color: rgba(230, 230, 250, 0.35); /* 淡化的淺灰色 */
+    opacity: 0.6; /* 降低不透明度 */
+    font-style: italic; /* 使用斜體樣式使其區別於正常文字 */
+}
+
+/* 支持不同瀏覽器的兼容寫法 */
+#userInput::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: rgba(230, 230, 250, 0.35);
+    opacity: 0.6;
+    font-style: italic;
+}
+#userInput::-moz-placeholder { /* Firefox 19+ */
+    color: rgba(230, 230, 250, 0.35);
+    opacity: 0.6;
+    font-style: italic;
+}
+#userInput:-ms-input-placeholder { /* IE 10+ */
+    color: rgba(230, 230, 250, 0.35);
+    opacity: 0.6;
+    font-style: italic;
+}
+
 .input-buttons {
     display: flex;
     justify-content: space-between;
