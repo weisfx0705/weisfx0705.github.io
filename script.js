@@ -363,6 +363,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const message = userInput.value.trim();
         if (message === '') return;
         
+        // 立即捕獲消息並清空輸入框，避免任何可能的操作干擾
+        userInput.value = '';
+        
         // 顯示用戶消息
         displayMessage(message, 'user');
         
@@ -375,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // 停止語音輸入（如果正在進行）
         stopListening();
         
-        // 清空輸入框 - 確保在處理完所有消息相關操作後執行
+        // 再次確保輸入框被清空 (雙重保險)
         userInput.value = '';
         
         // 立即將焦點返回到輸入框，以便用戶繼續輸入
@@ -498,13 +501,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 監聽發送按鈕
-    sendButton.addEventListener('click', sendUserMessage);
+    sendButton.addEventListener('click', function() {
+        // 先保存消息文本
+        const messageText = userInput.value.trim();
+        // 立即清空輸入框
+        userInput.value = '';
+        // 如果有消息文本，才調用發送函數
+        if (messageText !== '') {
+            // 重新將消息文本設置回輸入框，以便 sendUserMessage 可以讀取
+            userInput.value = messageText;
+            // 執行發送消息
+            sendUserMessage();
+            // 再次確保輸入框被清空
+            setTimeout(() => {
+                userInput.value = '';
+                userInput.focus();
+            }, 0);
+        }
+    });
     
     // 監聽Enter鍵
     userInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
-            sendUserMessage();
+            // 使用與發送按鈕相同的邏輯
+            const messageText = userInput.value.trim();
+            userInput.value = '';
+            if (messageText !== '') {
+                userInput.value = messageText;
+                sendUserMessage();
+                setTimeout(() => {
+                    userInput.value = '';
+                    userInput.focus();
+                }, 0);
+            }
         }
     });
     
