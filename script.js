@@ -366,8 +366,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // 顯示用戶消息
         displayMessage(message, 'user');
         
-        // 清空輸入框
+        // 清空輸入框 - 確保這行代碼執行
         userInput.value = '';
+        
+        // 立即將焦點返回到輸入框，以便用戶繼續輸入
+        userInput.focus();
         
         // 添加到對話歷史
         chatHistory.push({
